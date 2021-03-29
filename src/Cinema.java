@@ -61,6 +61,7 @@ public class Cinema {
         Scanner s = new Scanner(System.in);
         System.out.println("\n1. Show the seats\n" +
                 "2. Buy a ticket\n" +
+                "3. Statistics\n" +
                 "0. Exit");
         return s.nextInt();
     }
