@@ -94,7 +94,6 @@ public class Cinema {
             System.out.println("Wrong input!\n");
             buyTicket(array);
         }
-
     }
 
     public static int ticketPrice(int numRows, int numSeats, int seatRow) {
@@ -117,7 +116,7 @@ public class Cinema {
     public  static void printStats(int numRows, int numSeats) {
         System.out.println("\nNumber of purchased tickets: " + numberTicketsSold);
         double percentSold = ((double) numberTicketsSold * 100.0) / (numRows * numSeats);
-        System.out.printf("test %.2f%%", percentSold);
+        System.out.printf("Percentage: %.2f%%", percentSold);
         System.out.println("\nCurrent income: $" + currentIncome);
         System.out.println("Total income: $" + totalIncome(numRows, numSeats));
     }
