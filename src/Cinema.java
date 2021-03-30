@@ -3,6 +3,9 @@ import java.util.Scanner;
 
 public class Cinema {
 
+    static int numberTicketsSold = 0;
+    static int currentIncome = 0;
+
     public static void main(String[] args) {
 
         Scanner s = new Scanner(System.in);
@@ -27,6 +30,9 @@ public class Cinema {
                     break;
                 case 2:
                     buyTicket(seatMap);
+                    break;
+                case 3:
+                    printStats(numRows, numSeats);
                     break;
                 default:
                     continue;
@@ -72,8 +78,11 @@ public class Cinema {
         int seatRow = s.nextInt();
         System.out.println("Enter a seat number in that row:");
         int seatNumber = s.nextInt();
-        System.out.println("Ticket price: $" + ticketPrice(array.length, array[0].length, seatRow));
+        int ticketPrice = ticketPrice(array.length, array[0].length, seatRow);
+        System.out.println("Ticket price: $" + ticketPrice);
         array[seatRow - 1][seatNumber - 1] = "B";
+        numberTicketsSold++;
+        currentIncome += ticketPrice;
     }
 
     public static int ticketPrice(int numRows, int numSeats, int seatRow) {
@@ -93,24 +102,31 @@ public class Cinema {
         return ticketPrice;
     }
 
-//    public static void printTotalIncome(int numRows, int numSeats) {
-//
-//        int totalSeats = numSeats * numRows;
-//        int numFrontRows = numRows / 2;
-//        int numBackRows = numRows - numFrontRows;
-//        int totalIncome = 0;
-//
-//        if (totalSeats <= 60) {
-//            totalIncome = totalSeats * 10;
-//        } else {
-//            if (numRows % 2 == 0) {
-//                totalIncome = (numFrontRows * numSeats) * 10 + (numFrontRows * numSeats) * 8;
-//            } else {
-//                totalIncome = (numFrontRows * numSeats) * 10 + (numBackRows * numSeats) * 8;
-//            }
-//        }
-//        System.out.println("Total income:");
-//        System.out.println("$" + totalIncome);
-//    }
+    public  static void printStats(int numRows, int numSeats) {
+        System.out.println("\nNumber of purchased tickets: " + numberTicketsSold);
+        double percentSold = ((double) numberTicketsSold * 100.0) / (numRows * numSeats);
+        System.out.printf("test %.2f%%", percentSold);
+        System.out.println("\nCurrent income: $" + currentIncome);
+        System.out.println("Total income: $" + totalIncome(numRows, numSeats));
+    }
+
+    public static int totalIncome(int numRows, int numSeats) {
+
+        int totalSeats = numSeats * numRows;
+        int numFrontRows = numRows / 2;
+        int numBackRows = numRows - numFrontRows;
+        int totalIncome = 0;
+
+        if (totalSeats <= 60) {
+            totalIncome = totalSeats * 10;
+        } else {
+            if (numRows % 2 == 0) {
+                totalIncome = (numFrontRows * numSeats) * 10 + (numFrontRows * numSeats) * 8;
+            } else {
+                totalIncome = (numFrontRows * numSeats) * 10 + (numBackRows * numSeats) * 8;
+            }
+        }
+        return totalIncome;
+    }
 }
 
