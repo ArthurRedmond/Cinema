@@ -78,11 +78,23 @@ public class Cinema {
         int seatRow = s.nextInt();
         System.out.println("Enter a seat number in that row:");
         int seatNumber = s.nextInt();
-        int ticketPrice = ticketPrice(array.length, array[0].length, seatRow);
-        System.out.println("Ticket price: $" + ticketPrice);
-        array[seatRow - 1][seatNumber - 1] = "B";
-        numberTicketsSold++;
-        currentIncome += ticketPrice;
+        try {
+            int ticketPrice = ticketPrice(array.length, array[0].length, seatRow);
+            if (array[seatRow -1][seatNumber - 1].equalsIgnoreCase("B")) {
+                System.out.println("That ticket has already been purchased!\n");
+                buyTicket(array);
+            } else {
+                array[seatRow - 1][seatNumber - 1] = "B";
+                numberTicketsSold++;
+                currentIncome += ticketPrice;
+                System.out.println("Ticket price: $" + ticketPrice);
+            }
+        }
+        catch (Exception e) {
+            System.out.println("Wrong input!\n");
+            buyTicket(array);
+        }
+
     }
 
     public static int ticketPrice(int numRows, int numSeats, int seatRow) {
